@@ -10,6 +10,7 @@ import arrow7 from '../assets/arrow7.svg';
 import arrow8 from '../assets/arrow8.svg';
 import arrow9 from '../assets/arrow9.svg';
 import arrow10 from '../assets/arrow10.svg';
+import searchIcon from '../assets/searchIcon.svg';
 
 export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
@@ -64,6 +65,45 @@ export default function LandingPage() {
       desc: "Premium spaces made accessible through innovative structural methods.",
       image: "/hero_cabin.png"
     }
+  ];
+
+  const properties = [
+    {
+      id: 1,
+      city: "Atlanta, GA",
+      sqft: "2,226",
+      beds: 3,
+      baths: 2,
+      image:
+        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      id: 2,
+      city: "San Francisco, CA",
+      sqft: "2,226",
+      beds: 3,
+      baths: 2,
+      image:
+        "https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      id: 3,
+      city: "Boston, MA",
+      sqft: "2,226",
+      beds: 3,
+      baths: 2,
+      image:
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop",
+    },
+    {
+      id: 4,
+      city: "Boston, MA",
+      sqft: "2,226",
+      beds: 3,
+      baths: 2,
+      image:
+        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop",
+    },
   ];
 
   return (
@@ -452,6 +492,174 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
+      <section className="w-full min-h-screen bg-[#f5f5f5] py-10  px-0">
+        {/* Heading */}
+        <div className="text-center px-3">
+          <h1 className="text-[28px] md:text-5xl font-bold text-black font-serif">
+            Property Showcase
+          </h1>
+
+          {/* Filter Section */}
+          <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
+            {/* Buttons */}
+            <div className="flex bg-[#D9D9D9] rounded-full p-1 shadow-md">
+              <button className="bg-[#9b6b25] text-white px-5 md:px-6 py-2 rounded-full font-medium text-sm md:text-base">
+                Buy
+              </button>
+
+              <button className="px-5 md:px-6 py-2 rounded-full text-gray-700 font-medium hover:bg-gray-100 transition text-sm md:text-base">
+                Rent
+              </button>
+
+              <button className="px-5 md:px-6 py-2 rounded-full text-gray-700 font-medium hover:bg-gray-100 transition text-sm md:text-base">
+                Sold
+              </button>
+            </div>
+
+            {/* Search */}
+            <div className="flex items-center bg-[#D9D9D9] rounded-full overflow-hidden shadow-md border border-black">
+              <input
+                type="text"
+                placeholder="Enter City Or Zip Code"
+                className="
+                px-4
+                md:px-5
+                py-3
+                outline-none
+                bg-transparent
+                text-sm
+                md:text-base
+                w-[170px]
+                sm:w-[220px]
+                md:w-[250px]
+                lg:w-[320px]
+              "
+              />
+
+              <button className="bg-[#9b6b25] text-white w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full mr-1">
+                <img
+                  src={searchIcon}
+                  alt="searchIcon"
+                  className="w-3 md:w-4"
+                />
+              </button>
+            </div>
+          </div>
+        </div>
+
+        {/* Property Cards */}
+        <div
+          className="
+          grid 
+          grid-cols-2 
+          md:grid-cols-3 
+          lg:grid-cols-3 
+          gap-2
+          md:gap-3
+          mt-12 
+          max-w-7xl 
+          mx-auto
+          md:px-0
+        "
+        >
+          {properties.map((property) => (
+            <div
+              key={property.id}
+              className="
+              relative 
+              rounded-[30px] 
+              overflow-hidden 
+              group 
+              h-[240px]
+              md:h-[280px]
+              lg:h-[420px]
+            "
+            >
+              {/* Image */}
+              <img
+                src={property.image}
+                alt={property.city}
+                className="w-full h-full object-cover group-hover:scale-105 transition duration-500"
+              />
+
+              {/* Overlay */}
+              <div className="absolute inset-0 bg-black/35"></div>
+
+              {/* Content Box */}
+              <div
+                className="
+                absolute 
+                bottom-0 
+                left-0
+                bg-[#d9d0c7] 
+                rounded-tr-[28px]
+
+                px-2
+                md:px-4
+                lg:px-5
+
+                py-2
+                md:py-3
+                lg:py-4
+
+                w-[108px]
+                sm:w-[130px]
+                md:w-[160px]
+                lg:w-[220px]
+
+                shadow-xl
+              "
+              >
+                <h2
+                  className="
+                  text-[10px]
+                  sm:text-[11px]
+                  md:text-[14px]
+                  lg:text-xl
+                  font-semibold
+                  text-[#c6841a]
+                "
+                >
+                  {property.city}
+                </h2>
+
+                <div
+                  className="
+                  flex 
+                  items-center 
+                  justify-between 
+                  mt-1 
+                  text-[8px]
+                  sm:text-[9px]
+                  md:text-[10px]
+                  lg:text-sm
+                  text-gray-800
+                "
+                >
+                  <div>
+                    <p className="font-semibold">{property.sqft}</p>
+                    <span>Sq. Ft</span>
+                  </div>
+
+                  <div className="border-l border-gray-500 h-6 lg:h-10"></div>
+
+                  <div>
+                    <p className="font-semibold">{property.beds}</p>
+                    <span>Beds</span>
+                  </div>
+
+                  <div className="border-l border-gray-500 h-6 lg:h-10"></div>
+
+                  <div>
+                    <p className="font-semibold">{property.baths}</p>
+                    <span>Baths</span>
+                  </div>
+                </div>
+              </div>
+            </div>
+          ))}
+        </div>
+      </section>
     </div>
   );
 }
