@@ -21,7 +21,7 @@ export default function LandingPage() {
       num: "01",
       title: "COMFORT & SPACE",
       sub: "INNOVATION ON MULTIPLE LEVELS",
-      desc: "Alkan house is an 84 m2 residential space with an optimal layout of rooms and moder design.",
+      desc: <>Alkan house is an 84 m2 residential space with<br />an optimal layout of rooms and moder design.</>,
       image: "/alkan_interior.png"
     },
     {
@@ -145,7 +145,7 @@ export default function LandingPage() {
       </div> {/* End Hero Section */}
 
       {/* Advantages Section */}
-      <section className="w-full text-black pt-8   md:pt-16 lg:pt-16 pb-24 px-0 overflow-hidden md:overflow-visible">
+      <section className="w-full text-black pt-8   md:pt-16 lg:pt-16 lg:pb-10 px-0 overflow-hidden md:overflow-visible">
         <div className="w-full mx-auto flex flex-col items-center">
           {/* Top Text Area */}
           <div className="flex flex-col items-center text-center w-full max-w-4xl mx-auto mb-1 md:mb-12 lg:mb-4 relative">
@@ -213,15 +213,15 @@ export default function LandingPage() {
       </section>
 
       {/* Property Match Section */}
-      <section className="w-full bg-white text-black pt-8 md:pt-16 pb-16 px-0">
+      <section className="w-full bg-white text-black  lg:pt-0 pb-4 lg:pb-16 px-0">
         {/* Header */}
-        <div className="hidden md:flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 gap-6 px-4 sm:px-5 md:px-6 lg:px-8">
-          <h2 className="font-instrument font-normal text-[50px] leading-[50px] tracking-[0.01em]">
+        <div className="hidden md:flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 lg:mb-6 gap-6 px-4 sm:px-5 md:px-6 lg:px-8">
+          <h2 className="font-instrument font-normal text-[50px] lg:text-[80px] leading-[50px] lg:leading-[80px] tracking-[0.01em]">
             Discover Your Perfect<br />
             <span className="text-[#a27738]">Property Match</span>
           </h2>
           <div className="md:w-1/3 text-left md:text-right">
-            <p className="font-sans font-semibold text-[12px] leading-none tracking-[0.01em] text-right text-black">
+            <p className="font-sans font-semibold text-[12px] lg:text-[14px] leading-snug tracking-[0.01em] text-right text-black">
               Discover Your Perfect Property Match with our<br className="hidden lg:block" />
               expert team, dedicated to finding the ideal<br className="hidden lg:block" />
               home or investment in California, San
@@ -236,11 +236,11 @@ export default function LandingPage() {
             <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105" style={{ backgroundImage: "url('/hero_cabin.png')" }} />
 
             {/* Info Card Overlay */}
-            <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 bg-white/70 backdrop-blur-xl rounded-[1.5rem] sm:rounded-[2rem] p-4 sm:p-6 shadow-2xl flex flex-col justify-between border border-white/50">
-              <div className="flex justify-between items-start mb-4 sm:mb-8">
+            <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 bg-white/70 backdrop-blur-xl rounded-[1.5rem] sm:rounded-[2rem] p-3 sm:p-5 shadow-2xl flex flex-col justify-between border border-white/50">
+              <div className="flex justify-between items-start mb-0">
                 <h3 className="text-[#a27738] font-sans font-semibold text-[20px] leading-none tracking-normal">$930,000</h3>
-                <button className="bg-[#a27738] text-white p-2.5 sm:p-4 rounded-full shadow-xl hover:scale-110 transition-all cursor-pointer">
-                  <ArrowUpRight size={20} strokeWidth={3} className="sm:w-6 sm:h-6" />
+                <button className="bg-[#a27738] text-white p-2 sm:p-2.5 rounded-full shadow-xl hover:scale-110 transition-all cursor-pointer">
+                  <ArrowUpRight size={18} strokeWidth={3} className="sm:w-5 sm:h-5" />
                 </button>
               </div>
 
@@ -286,10 +286,10 @@ export default function LandingPage() {
       </section>
 
       {/* Comfort & Space Accordion Section */}
-      <section className="w-full bg-[#2F2F2F] text-white py-16  px-4 sm:px-5 md:px-6 lg:px-8 overflow-x-hidden">
+      <section className="w-full bg-[#2F2F2F] text-white py-6 md:py-12 lg:py-16 px-4 sm:px-5 md:px-6 lg:px-8 overflow-x-hidden">
         <div className="max-w-[1400px] mx-auto">
           {/* Mobile/Tablet Accordion (Vertical Stack) */}
-          <div className="block lg:hidden space-y-4">
+          <div className="hidden space-y-4">
             {accordionData.map((item) => {
               const isOpen = activeAccordion === item.id;
               return (
@@ -324,55 +324,57 @@ export default function LandingPage() {
           </div>
 
           {/* Desktop Accordion (Horizontal Expand) */}
-          <div className="hidden lg:flex h-[500px] w-full max-w-[1200px] mx-auto" style={{overflow: 'hidden'}}>
+          <div className="flex h-[250px] md:h-[400px] lg:h-[500px] w-full max-w-[1200px] mx-auto" style={{ overflow: 'hidden' }}>
             {accordionData.map((item) => {
               const isOpen = activeAccordion === item.id;
               return (
                 <div
                   key={item.id}
                   onClick={() => setActiveAccordion(item.id)}
-                  className={`relative h-full flex flex-col transition-all duration-700 ease-out cursor-pointer ${
-                    isOpen ? 'flex-[3]' : 'flex-1 hover:bg-white/5'
-                  }`}
+                  className={`relative h-full flex flex-col transition-all duration-700 ease-out cursor-pointer ${isOpen ? 'flex-[3]' : 'flex-1 hover:bg-white/5'
+                    }`}
                 >
                   {/* Vertical divider */}
-                  {item.id !== "06" && (
-                    <div className="absolute right-0 top-8 bottom-8 w-px bg-white/15 z-10" />
-                  )}
+                  <div className="absolute right-0 top-8 bottom-8 w-px bg-white/15 z-10" />
 
                   {/* Expanded Content */}
                   <div className={`flex flex-col h-full w-full transition-all duration-500 ${isOpen ? 'opacity-100 delay-200 relative' : 'opacity-0 pointer-events-none absolute inset-0'}`}>
                     {/* Top: subtitle + title */}
-                    <div className="px-5 pt-5 flex-shrink-0">
-                      <p className="text-[#a27738] font-sans font-medium text-[10px] tracking-[0.2em] uppercase mb-1">
+                    <div className="px-1 sm:px-2 md:px-5 pt-1 sm:pt-2 md:pt-5 flex-shrink-0">
+                      <p className="text-[#91682A] font-sans font-medium text-[7px] sm:text-[8px] md:text-[10px] lg:text-[14px] leading-none tracking-normal uppercase mb-1">
                         {item.sub}
                       </p>
-                      <h2 className="font-sans font-bold text-[28px] leading-tight text-white uppercase">
-                        {item.title}
+                      <h2 className="font-sans font-bold text-[14px] sm:text-[18px] md:text-[24px] lg:text-[40px] leading-none tracking-normal text-white uppercase mt-1">
+                        {item.title.split(' & ').map((part, index, arr) => (
+                          <React.Fragment key={index}>
+                            {part}
+                            {index < arr.length - 1 && <><br />& </>}
+                          </React.Fragment>
+                        ))}
                       </h2>
                     </div>
 
-                    {/* Middle: image — pushed to right */}
-                    <div className="px-5 pt-2 flex-1 overflow-hidden flex justify-center">
-                      <div className="w-[65%] h-full overflow-hidden shadow-xl">
+                    {/* Middle: image */}
+                    <div className="px-1 sm:px-2 md:px-5 pt-1 md:pt-4 flex-1 overflow-hidden flex justify-center">
+                      <div className="w-[80%] sm:w-[70%] md:w-[65%] h-full overflow-hidden shadow-xl">
                         <img src={item.image} alt={item.title} className="w-full h-full object-cover" />
                       </div>
                     </div>
 
-                    {/* Bottom: number + description, pinned right below image */}
-                    <div className="flex items-center gap-3 px-5 py-3 flex-shrink-0">
-                      <span className="text-white/70 font-sans font-light text-[13px] leading-none flex-shrink-0">{item.num}</span>
-                      <p className="text-white/60 font-sans font-light text-[10px] leading-snug">
+                    {/* Bottom: number + description */}
+                    <div className="flex items-start gap-1 lg:gap-4 px-1 sm:px-2 lg:px-5 py-0.5 sm:py-1 md:py-2 lg:py-4 flex-shrink-0">
+                      <span className="text-white font-sans font-light text-[10px] sm:text-[14px] md:text-[16px] lg:text-[40px] leading-none tracking-normal flex-shrink-0">{item.num}</span>
+                      <p className="text-white font-inter font-bold text-[7px] sm:text-[7px] md:text-[8px] lg:text-[14px] leading-snug tracking-normal flex-1 line-clamp-3 md:line-clamp-2 lg:line-clamp-none overflow-hidden">
                         {item.desc}
                       </p>
                     </div>
                   </div>
 
                   {/* Collapsed Content */}
-                  <div className={`absolute inset-0 flex flex-col items-center py-5 transition-opacity duration-300 ${!isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
+                  <div className={`absolute inset-0 flex flex-col items-center py-3 sm:py-5 transition-opacity duration-300 ${!isOpen ? 'opacity-100' : 'opacity-0 pointer-events-none'}`}>
                     {/* Number at top */}
                     <span
-                      className="text-white/60 font-sans font-light text-[13px] leading-none mb-3 flex-shrink-0"
+                      className="text-white font-sans font-thin text-[16px] sm:text-[22px] md:text-[30px] leading-none mb-2 sm:mb-3 flex-shrink-0"
                       style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
                     >
                       {item.num}
@@ -380,7 +382,7 @@ export default function LandingPage() {
                     {/* Title fills height — reads bottom-to-top */}
                     <div className="flex-1 flex items-center justify-center">
                       <span
-                        className="text-white font-sans font-bold text-[28px] tracking-wide uppercase leading-none"
+                        className="text-white font-sans font-bold text-[14px] sm:text-[20px] md:text-[28px] tracking-wide uppercase leading-none"
                         style={{ writingMode: 'vertical-rl', transform: 'rotate(180deg)' }}
                       >
                         {item.title}
