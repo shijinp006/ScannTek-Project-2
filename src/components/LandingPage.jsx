@@ -652,7 +652,7 @@ export default function LandingPage() {
 
                   <div>
                     <p className="font-semibold">{property.baths}</p>
-                    <span>Bath</span>
+                    <span>Baths</span>
                   </div>
                 </div>
               </div>
