@@ -30,6 +30,26 @@
 }
 
 /* Page wrapper settings and animations */
+.card-corner-tl {
+  position: absolute;
+  left: 0;
+  bottom: 100%;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at top right, transparent 19px, rgba(171, 167, 152, 0.95) 20px);
+  pointer-events: none;
+}
+
+.card-corner-br {
+  position: absolute;
+  bottom: 0;
+  left: 100%;
+  width: 20px;
+  height: 20px;
+  background: radial-gradient(circle at top right, transparent 19px, rgba(171, 167, 152, 0.95) 20px);
+  pointer-events: none;
+}
+
 body {
   margin: 0;
   font-family: 'Plus Jakarta Sans', sans-serif;

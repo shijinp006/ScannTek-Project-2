@@ -75,7 +75,7 @@ export default function LandingPage() {
       beds: 3,
       baths: 2,
       image:
-        "https://images.unsplash.com/photo-1505693416388-ac5ce068fe85?q=80&w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1600596542815-ffad4c1539a9?q=80&w=1200&auto=format&fit=crop",
     },
     {
       id: 2,
@@ -84,7 +84,7 @@ export default function LandingPage() {
       beds: 3,
       baths: 2,
       image:
-        "https://images.unsplash.com/photo-1494526585095-c41746248156?q=80&w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop",
     },
     {
       id: 3,
@@ -93,16 +93,16 @@ export default function LandingPage() {
       beds: 3,
       baths: 2,
       image:
-        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1200&auto=format&fit=crop",
     },
     {
       id: 4,
-      city: "Boston, MA",
+      city: "Atlanta, GA",
       sqft: "2,226",
       beds: 3,
       baths: 2,
       image:
-        "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop",
+        "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop",
     },
   ];
 
@@ -492,7 +492,7 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
-      <section className="w-full min-h-screen bg-[#f5f5f5] py-10  px-0">
+      <section className="w-full min-h-screen bg-[#f5f5f5] py-2 md:py-10 lg:py-10 px-0">
         {/* Heading */}
         <div className="text-center px-3">
           <h1 className="text-[28px] md:text-5xl font-bold text-black font-serif">
@@ -500,47 +500,50 @@ export default function LandingPage() {
           </h1>
 
           {/* Filter Section */}
-          <div className="flex flex-wrap items-center justify-center gap-3 mt-6">
+          <div className="flex items-center justify-center gap-2 md:gap-3  md:mt-6 px-3">
             {/* Buttons */}
-            <div className="flex bg-[#D9D9D9] rounded-full p-1 shadow-md">
-              <button className="bg-[#9b6b25] text-white px-5 md:px-6 py-2 rounded-full font-medium text-sm md:text-base">
+            <div className="flex bg-[#ECEAE4] md:bg-[#D9D9D9] rounded-full p-0.5 md:p-1 shadow-sm md:shadow-md">
+              <button className="bg-[#8c6229] md:bg-[#9b6b25] text-white px-3 md:px-6 py-1 md:py-2 rounded-full font-semibold md:font-medium text-[10px] md:text-base cursor-pointer">
                 Buy
               </button>
 
-              <button className="px-5 md:px-6 py-2 rounded-full text-gray-700 font-medium hover:bg-gray-100 transition text-sm md:text-base">
+              <button className="px-3 md:px-6 py-1 md:py-2 rounded-full text-gray-700 font-semibold md:font-medium hover:bg-black/5 md:hover:bg-gray-100 transition text-[10px] md:text-base cursor-pointer">
                 Rent
               </button>
 
-              <button className="px-5 md:px-6 py-2 rounded-full text-gray-700 font-medium hover:bg-gray-100 transition text-sm md:text-base">
+              <button className="px-3 md:px-6 py-1 md:py-2 rounded-full text-gray-700 font-semibold md:font-medium hover:bg-black/5 md:hover:bg-gray-100 transition text-[10px] md:text-base cursor-pointer">
                 Sold
               </button>
             </div>
 
             {/* Search */}
-            <div className="flex items-center bg-[#D9D9D9] rounded-full overflow-hidden shadow-md border border-black">
+            <div className="flex items-center bg-white md:bg-[#D9D9D9] rounded-full overflow-hidden shadow-sm md:shadow-md border border-black p-0.5 md:p-0">
               <input
                 type="text"
                 placeholder="Enter City Or Zip Code"
                 className="
-                px-4
+                px-2.5
                 md:px-5
-                py-3
+                py-1
+                md:py-3
                 outline-none
                 bg-transparent
-                text-sm
+                text-[10px]
                 md:text-base
-                w-[170px]
-                sm:w-[220px]
+                text-black
+                placeholder-gray-400
+                w-[110px]
+                sm:w-[130px]
                 md:w-[250px]
                 lg:w-[320px]
               "
               />
 
-              <button className="bg-[#9b6b25] text-white w-10 h-10 md:w-12 md:h-12 flex items-center justify-center rounded-full mr-1">
+              <button className="bg-[#8c6229] md:bg-[#9b6b25] text-white w-6 h-6 md:w-12 md:h-12 flex items-center justify-center rounded-full mr-0.5 md:mr-1 cursor-pointer">
                 <img
                   src={searchIcon}
                   alt="searchIcon"
-                  className="w-3 md:w-4"
+                  className="w-2.5 md:w-4"
                 />
               </button>
             </div>
@@ -556,9 +559,11 @@ export default function LandingPage() {
           lg:grid-cols-3 
           gap-2
           md:gap-3
-          mt-12 
+          mt-6
+          md:mt-12 
           max-w-7xl 
           mx-auto
+          
           md:px-0
         "
         >
@@ -567,10 +572,11 @@ export default function LandingPage() {
               key={property.id}
               className="
               relative 
-              rounded-[30px] 
+              rounded-[16px] 
+              md:rounded-[30px] 
               overflow-hidden 
               group 
-              h-[240px]
+              h-[160px]
               md:h-[280px]
               lg:h-[420px]
             "
@@ -591,8 +597,11 @@ export default function LandingPage() {
                 absolute 
                 bottom-0 
                 left-0
-                bg-[#d9d0c7] 
-                rounded-tr-[28px]
+                bg-[#aba798]/95
+                backdrop-blur-[4px]
+                md:bg-[#d9d0c7] 
+                rounded-tr-[20px]
+                md:rounded-tr-[28px]
 
                 px-2
                 md:px-4
@@ -602,7 +611,7 @@ export default function LandingPage() {
                 md:py-3
                 lg:py-4
 
-                w-[108px]
+                w-[68%]
                 sm:w-[130px]
                 md:w-[160px]
                 lg:w-[220px]
@@ -612,12 +621,13 @@ export default function LandingPage() {
               >
                 <h2
                   className="
-                  text-[10px]
+                  text-[8px]
                   sm:text-[11px]
                   md:text-[14px]
                   lg:text-xl
                   font-semibold
-                  text-[#c6841a]
+                  text-[#a27738]
+                  md:text-[#c6841a]
                 "
                 >
                   {property.city}
@@ -629,35 +639,90 @@ export default function LandingPage() {
                   items-center 
                   justify-between 
                   mt-1 
-                  text-[8px]
+                  text-[7px]
                   sm:text-[9px]
                   md:text-[10px]
                   lg:text-sm
                   text-gray-800
                 "
                 >
-                  <div>
+                  <div className="text-center flex-1">
                     <p className="font-semibold">{property.sqft}</p>
-                    <span>Sq. Ft</span>
+                    <span className="text-[6px] sm:text-[9px] md:text-[10px] lg:text-sm text-gray-700/90 font-medium">Sq. Ft</span>
                   </div>
 
-                  <div className="border-l border-gray-500 h-6 lg:h-10"></div>
+                  <div className="border-l border-gray-600/50 h-4 lg:h-10 mx-1"></div>
 
-                  <div>
+                  <div className="text-center flex-1">
                     <p className="font-semibold">{property.beds}</p>
-                    <span>Beds</span>
+                    <span className="text-[6px] sm:text-[9px] md:text-[10px] lg:text-sm text-gray-700/90 font-medium">Beds</span>
                   </div>
 
-                  <div className="border-l border-gray-500 h-6 lg:h-10"></div>
+                  <div className="border-l border-gray-600/50 h-5 lg:h-10 mx-1"></div>
 
-                  <div>
+                  <div className="text-center flex-1">
                     <p className="font-semibold">{property.baths}</p>
-                    <span>Baths</span>
+                    <span className="text-[6px] sm:text-[9px] md:text-[10px] lg:text-sm text-gray-700/90 font-medium">Baths</span>
                   </div>
                 </div>
               </div>
             </div>
           ))}
+        </div>
+      </section>
+
+      {/* Pedro Residence Section */}
+      <section className="w-full bg-white py-10 md:py-14 lg:py-20  lg:px-4 overflow-hidden">
+        {/* Top Row: Title + Description */}
+        <div className="flex flex-col md:flex-row md:items-end md:justify-between mb-6 md:mb-10 lg:mb-12 gap-4 md:gap-8">
+          {/* Left: Label + Title */}
+          <div className="flex-shrink-0">
+            <p className="text-[10px] md:text-xs font-sans font-semibold tracking-[0.2em] uppercase text-[#000000] mb-1 md:mb-2">
+              OUR PROJECT
+            </p>
+            <h2 className="font-instrument font-normal leading-none tracking-tight  w-[170px] lg:w-full md:w-full">
+              <span className="text-[26px] sm:text-[48px] md:text-[64px] lg:text-[80px] text-black uppercase">PEDRO </span>
+              <span className="text-[26px] sm:text-[48px] md:text-[64px] lg:text-[80px] text-[#a27738] uppercase">RESIDENCE</span>
+            </h2>
+          </div>
+
+          {/* Right: Description */}
+          <p className="text-black font-sans font-bold text-[8px] sm:text-[12px] md:text-[10px] lg:text-[12px]  leading-relaxed max-w-[300px] md:max-w-[300px] lg:max-w-[340px] md:text-right self-start md:self-end ">
+            Pedro Residence is a comfortable and elegant<br className="hidden md:block" />
+            <span className=' text-start '>residence, offering spectacular views from its windows</span>
+          </p>
+        </div>
+
+        {/* Image Gallery Row with ARC Watermark */}
+        <div className="relative h-[280px] sm:h-[320px] md:h-[400px] lg:h-[440px]">
+          {/* ARC Watermark */}
+          <div className="absolute inset-0 flex items-center justify-center pointer-events-none z-10 select-none overflow-hidden">
+            <span className="text-[120px] sm:text-[160px] md:text-[420px] lg:text-[550px] font-instrument font-bold uppercase tracking-[0.15em] text-black/[0.05] leading-none whitespace-nowrap">
+              ARC
+            </span>
+          </div>
+
+          {/* 4 Images — flex row, same height, staggered via self-start / self-end */}
+          <div className="relative z-0 flex flex-row justify-center items-end gap-2 md:gap-3 lg:gap-5 h-full">
+            {[
+              "https://images.unsplash.com/photo-1480074568708-e7b720bb3f09?q=80&w=1200&auto=format&fit=crop",
+              "https://images.unsplash.com/photo-1558618666-fcd25c85cd64?q=80&w=1200&auto=format&fit=crop",
+              "https://images.unsplash.com/photo-1512917774080-9991f1c4c750?q=80&w=1200&auto=format&fit=crop",
+              "https://images.unsplash.com/photo-1600585154526-990dced4db0d?q=80&w=1200&auto=format&fit=crop",
+            ].map((src, index) => (
+              <div
+                key={index}
+                className={`overflow-hidden flex-1 h-[200px] sm:h-[240px]  md:h-[250px] lg:h-[340px] group ${index % 2 !== 0 ? "self-end" : "self-start"
+                  }`}
+              >
+                <img
+                  src={src}
+                  alt={`Pedro Residence View ${index + 1}`}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                />
+              </div>
+            ))}
+          </div>
         </div>
       </section>
     </div>
