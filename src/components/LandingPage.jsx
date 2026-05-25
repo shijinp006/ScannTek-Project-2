@@ -1,5 +1,7 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Menu, X, ArrowRight, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
+import { motion } from 'framer-motion';
+import Lenis from 'lenis';
 import arrow1 from '../assets/arrow1.svg';
 import arrow2 from '../assets/arrow2.svg';
 import arrow3 from '../assets/arrow3.svg';
@@ -15,6 +17,36 @@ import searchIcon from '../assets/searchIcon.svg';
 export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeAccordion, setActiveAccordion] = useState("01");
+
+  useEffect(() => {
+    const lenis = new Lenis({
+      duration: 1.2,
+      easing: (t) => Math.min(1, 1.001 - Math.pow(2, -10 * t)),
+      direction: 'vertical',
+      gestureDirection: 'vertical',
+      smooth: true,
+      mouseMultiplier: 1,
+      smoothTouch: false,
+      touchMultiplier: 2,
+      infinite: false,
+    });
+
+    function raf(time) {
+      lenis.raf(time);
+      requestAnimationFrame(raf);
+    }
+
+    requestAnimationFrame(raf);
+
+    return () => {
+      lenis.destroy();
+    };
+  }, []);
+
+  const fadeInUp = {
+    hidden: { opacity: 0, y: 40 },
+    visible: { opacity: 1, y: 0, transition: { duration: 0.8, ease: "easeOut" } }
+  };
 
   const accordionData = [
     {
@@ -109,7 +141,12 @@ export default function LandingPage() {
   return (
     <div className="w-full bg-white min-h-screen">
       {/* Hero Section */}
-      <div className="relative w-full min-h-[85vh] md:h-[85vh] lg:h-[95vh] rounded-tl-[1.5rem] rounded-tr-[1.5rem] rounded-bl-[1.5rem] rounded-br-none overflow-hidden bg-[#0d0f12] animate-scale-up flex flex-col p-4 sm:p-5 md:p-6 text-white">
+      <motion.div
+        initial="hidden"
+        animate="visible"
+        variants={fadeInUp}
+        className="relative w-full min-h-[85vh] md:h-[85vh] lg:h-[95vh] rounded-tl-[1.5rem] rounded-tr-[1.5rem] rounded-bl-[1.5rem] rounded-br-none overflow-hidden bg-[#0d0f12] animate-scale-up flex flex-col p-4 sm:p-5 md:p-6 text-white"
+      >
         {/* Background Image & Overlay */}
         <div
           className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-10000 ease-out hover:scale-105"
@@ -182,10 +219,16 @@ export default function LandingPage() {
             </div>
           </div>
         </div>
-      </div> {/* End Hero Section */}
+      </motion.div> {/* End Hero Section */}
 
       {/* Advantages Section */}
-      <section className="w-full text-black pt-8   md:pt-16 lg:pt-16 lg:pb-10 px-0 overflow-hidden md:overflow-visible">
+      <section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInUp}
+        className="w-full text-black pt-8   md:pt-16 lg:pt-16 lg:pb-10 px-0 overflow-hidden md:overflow-visible"
+      >
         <div className="w-full mx-auto flex flex-col items-center">
           {/* Top Text Area */}
           <div className="flex flex-col items-center text-center w-full max-w-4xl mx-auto mb-1 md:mb-12 lg:mb-4 relative">
@@ -253,7 +296,13 @@ export default function LandingPage() {
       </section>
 
       {/* Property Match Section */}
-      <section className="w-full bg-white text-black  lg:pt-0 pb-4 lg:pb-16 px-0">
+      <section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInUp}
+        className="w-full bg-white text-black  lg:pt-0 pb-4 lg:pb-16 px-0"
+      >
         {/* Header */}
         <div className="hidden md:flex flex-col md:flex-row justify-between items-start md:items-end mb-8 md:mb-12 lg:mb-6 gap-6 px-4 sm:px-5 md:px-6 lg:px-8">
           <h2 className="font-instrument font-normal text-[50px] lg:text-[80px] leading-[50px] lg:leading-[80px] tracking-[0.01em]">
@@ -326,7 +375,13 @@ export default function LandingPage() {
       </section>
 
       {/* Comfort & Space Accordion Section */}
-      <section className="w-full bg-[#2F2F2F] text-white py-6 md:py-12 lg:py-16 px-4 sm:px-5 md:px-6 lg:px-8 overflow-x-hidden">
+      <section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInUp}
+        className="w-full bg-[#2F2F2F] text-white py-6 md:py-12 lg:py-16 px-4 sm:px-5 md:px-6 lg:px-8 overflow-x-hidden"
+      >
         <div className="max-w-[1400px] mx-auto">
           {/* Mobile/Tablet Accordion (Vertical Stack) */}
           <div className="hidden space-y-4">
@@ -492,7 +547,7 @@ export default function LandingPage() {
           </div>
         </div>
       </div>
-      <section className="w-full min-h-screen bg-[#f5f5f5] py-2 md:py-10 lg:py-10 px-0">
+      <section className="w-full  bg-[#f5f5f5] py-2 md:py-10 lg:py-10 px-0">
         {/* Heading */}
         <div className="text-center px-3">
           <h1 className="text-[28px] md:text-5xl font-bold text-black font-serif">
@@ -672,7 +727,13 @@ export default function LandingPage() {
       </section>
 
       {/* Pedro Residence Section */}
-      <section className="w-full bg-white sm:bg-white py-6 sm:py-10 md:py-14 lg:py-20  sm:px-0 lg:px-4 overflow-hidden">
+      <section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInUp}
+        className="w-full bg-white sm:bg-white py-6 sm:py-10 md:py-14 lg:py-20  sm:px-0 lg:px-4 overflow-hidden"
+      >
         {/* Top Row: Title + Description */}
         <div className="flex flex-row items-start justify-between md:items-end md:justify-between mb-4 sm:mb-6 md:mb-10 lg:mb-12 gap-2 sm:gap-4 md:gap-8">
           {/* Left: Label + Title */}
@@ -727,7 +788,13 @@ export default function LandingPage() {
       </section>
 
       {/* New Let's Talk Footer Section */}
-      <section className="w-full bg-[#333333] rounded-[1rem] sm:rounded-[1rem] p-3 text-white overflow-hidden flex flex-col">
+      <section
+        initial="hidden"
+        whileInView="visible"
+        viewport={{ once: true, margin: "-100px" }}
+        variants={fadeInUp}
+        className="w-full bg-[#333333] rounded-[1rem] sm:rounded-[1rem] p-3 text-white overflow-hidden flex flex-col"
+      >
         {/* Images Row */}
         <div className="flex flex-row justify-center items-end gap-2 sm:gap-4 md:gap-5 lg:gap-6 h-[140px] sm:h-[240px] md:h-[320px] w-full mb-12 sm:mb-20">
           {[
@@ -757,25 +824,45 @@ export default function LandingPage() {
         {/* Let's Talk Text */}
         <div className="flex justify-center items-center w-full mb-4 sm:mb-16 lg:mb-24 px-2 sm:px-0 mt-4 md:mt-0">
           {/* Mobile Text */}
-          <div className="w-full flex flex-col md:hidden text-[76px] font-sans font-bold leading-[0.85] tracking-tight text-white px-2">
+          <motion.div
+            initial={{ opacity: 0, y: 60 }}
+            whileInView={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-50px" }}
+            className="w-full flex flex-col md:hidden text-[76px] font-sans font-bold leading-[0.85] tracking-tight text-white px-2"
+          >
             <div className="flex items-center justify-between w-full">
               <span>LET'S</span>
-              <button className="bg-[#a27738]/95 hover:bg-[#a27738] text-white w-14 h-14 rounded-full flex items-center justify-center transition-transform hover:scale-110 cursor-pointer shadow-xl backdrop-blur-sm z-10 shrink-0">
+              <motion.button
+                whileHover={{ scale: 1.1, rotate: 15 }}
+                whileTap={{ scale: 0.95 }}
+                className="bg-[#a27738]/95 hover:bg-[#a27738] text-white w-14 h-14 rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-xl backdrop-blur-sm z-10 shrink-0"
+              >
                 <ArrowUpRight className="w-7 h-7" strokeWidth={3} />
-              </button>
+              </motion.button>
             </div>
             <div className="flex justify-end w-full mt-2">
               <span>TALK</span>
             </div>
-          </div>
+          </motion.div>
 
           {/* Desktop/Tab Text */}
-          <h2 className="hidden md:inline-block text-[80px] md:text-[138px] lg:text-[250px] font-sans font-normal leading-none tracking-tight text-white relative text-center">
+          <motion.h2
+            initial={{ opacity: 0, y: 100, scale: 0.95 }}
+            whileInView={{ opacity: 1, y: 0, scale: 1 }}
+            transition={{ duration: 1.2, ease: [0.16, 1, 0.3, 1] }}
+            viewport={{ once: true, margin: "-50px" }}
+            className="hidden md:inline-block text-[80px] md:text-[138px] lg:text-[250px] font-sans font-normal leading-none tracking-tight text-white relative text-center"
+          >
             LET'S TALK
-            <button className="absolute right-[8%] sm:right-[10%] top-0 sm:top-[10%] bg-[#a27738]/95 hover:bg-[#a27738] text-white w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-24 lg:h-24 rounded-full flex items-center justify-center transition-transform hover:scale-110 cursor-pointer shadow-2xl backdrop-blur-sm z-10">
+            <motion.button
+              whileHover={{ scale: 1.1, rotate: 15 }}
+              whileTap={{ scale: 0.95 }}
+              className="absolute right-[8%] sm:right-[10%] top-0 sm:top-[10%] bg-[#a27738]/95 hover:bg-[#a27738] text-white w-8 h-8 sm:w-12 sm:h-12 md:w-16 md:h-16 lg:w-24 lg:h-24 rounded-full flex items-center justify-center transition-colors cursor-pointer shadow-2xl backdrop-blur-sm z-10"
+            >
               <ArrowUpRight className="w-4 h-4 sm:w-6 sm:h-6 md:w-8 md:h-8 lg:w-10 lg:h-10" strokeWidth={2.5} />
-            </button>
-          </h2>
+            </motion.button>
+          </motion.h2>
         </div>
 
         {/* Divider */}
@@ -807,7 +894,7 @@ export default function LandingPage() {
               <p className="text-[7px] sm:text-[10px] md:text-xs text-white/50 font-sans text-left md:text-right tracking-wide md:order-2">
                 © 2023 SKYWlNKS INC. All Rights Reserved.
               </p>
-              
+
               <div className="flex items-center gap-2 sm:gap-3 text-[#a27738] md:order-1">
                 <div className="w-5 h-5 sm:w-8 sm:h-8 rounded-full bg-[#e6d5c3] flex items-center justify-center hover:scale-110 transition-transform cursor-pointer">
                   <svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" className="sm:w-4 sm:h-4"><rect x="2" y="2" width="20" height="20" rx="5" ry="5"></rect><path d="M16 11.37A4 4 0 1 1 12.63 8 4 4 0 0 1 16 11.37z"></path><line x1="17.5" y1="6.5" x2="17.51" y2="6.5"></line></svg>
