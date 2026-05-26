@@ -17,6 +17,7 @@ import searchIcon from '../assets/searchIcon.svg';
 export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeAccordion, setActiveAccordion] = useState("01");
+  const [activeMatchIndex, setActiveMatchIndex] = useState(0);
   const lenisRef = useRef(null);
 
   useEffect(() => {
@@ -141,6 +142,44 @@ export default function LandingPage() {
         "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop",
     },
   ];
+
+  const matchData = [
+    {
+      price: "$930,000",
+      address: "789 Lombard Street,<br />San Francisco,<br />CA 94133",
+      sqft: "2,226",
+      beds: "3",
+      baths: "2",
+      image: "/hero_cabin.png"
+    },
+    {
+      price: "$1,150,000",
+      address: "423 Pine Street,<br />San Francisco,<br />CA 94108",
+      sqft: "2,850",
+      beds: "4",
+      baths: "3",
+      image: "https://images.unsplash.com/photo-1600585154340-be6161a56a0c?q=80&w=1200&auto=format&fit=crop"
+    },
+    {
+      price: "$850,000",
+      address: "1550 Steiner St,<br />San Francisco,<br />CA 94115",
+      sqft: "1,920",
+      beds: "2",
+      baths: "2",
+      image: "https://images.unsplash.com/photo-1564013799919-ab600027ffc6?q=80&w=1200&auto=format&fit=crop"
+    },
+    {
+      price: "$2,400,000",
+      address: "2200 Broadway,<br />San Francisco,<br />CA 94115",
+      sqft: "4,100",
+      beds: "5",
+      baths: "4.5",
+      image: "https://images.unsplash.com/photo-1600607687939-ce8a6c25118c?q=80&w=1200&auto=format&fit=crop"
+    }
+  ];
+
+  const activeMatch = matchData[activeMatchIndex];
+  const sideMatches = matchData.map((item, index) => ({...item, originalIndex: index})).filter(item => item.originalIndex !== activeMatchIndex);
 
   return (
     <div id="home" className="w-full bg-white min-h-screen">
@@ -324,33 +363,31 @@ export default function LandingPage() {
         <div className="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-6">
           {/* Left Large Card */}
           <div className="relative rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden h-[280px] sm:h-[400px] md:h-[350px] lg:h-[600px] group shadow-lg">
-            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105" style={{ backgroundImage: "url('/hero_cabin.png')" }} />
+            <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105" style={{ backgroundImage: `url('${activeMatch.image}')` }} />
 
             {/* Info Card Overlay */}
             <div className="absolute bottom-3 left-3 right-3 sm:bottom-5 sm:left-5 sm:right-5 bg-white/70 backdrop-blur-xl rounded-[1.5rem] sm:rounded-[2rem] p-3 sm:p-5 shadow-2xl flex flex-col justify-between border border-white/50">
               <div className="flex justify-between items-start mb-0">
-                <h3 className="text-[#a27738] font-sans font-semibold text-[20px] leading-none tracking-normal">$930,000</h3>
+                <h3 className="text-[#a27738] font-sans font-semibold text-[20px] leading-none tracking-normal">{activeMatch.price}</h3>
                 <button className="bg-[#a27738] text-white p-2 sm:p-2.5 rounded-full shadow-xl hover:scale-110 transition-all cursor-pointer">
                   <ArrowUpRight size={18} strokeWidth={3} className="sm:w-5 sm:h-5" />
                 </button>
               </div>
 
               <div className="flex justify-between items-end">
-                <p className="text-black font-sans font-normal text-[12px] leading-none tracking-normal">
-                  789 Lombard Street,<br />San Francisco,<br />CA 94133
-                </p>
+                <p className="text-black font-sans font-normal text-[12px] leading-none tracking-normal" dangerouslySetInnerHTML={{ __html: activeMatch.address }} />
 
                 <div className="flex items-center gap-3 sm:gap-4">
                   <div className="text-center font-sans font-medium text-[12px] leading-none tracking-normal text-black">
-                    2,226<br />Sq. Ft
+                    {activeMatch.sqft}<br />Sq. Ft
                   </div>
                   <div className="w-[1px] h-6 sm:h-8 bg-black/30" />
                   <div className="text-center font-sans font-medium text-[12px] leading-none tracking-normal text-black">
-                    3<br />Beds
+                    {activeMatch.beds}<br />Beds
                   </div>
                   <div className="w-[1px] h-6 sm:h-8 bg-black/30" />
                   <div className="text-center font-sans font-medium text-[12px] leading-none tracking-normal text-black">
-                    2<br />Baths
+                    {activeMatch.baths}<br />Baths
                   </div>
                 </div>
               </div>
@@ -361,16 +398,16 @@ export default function LandingPage() {
           <div className="flex flex-col gap-4 md:gap-6 h-auto md:h-[350px] lg:h-[600px]">
             {/* Top two small images */}
             <div className="grid grid-cols-2 gap-4 md:gap-6 h-[130px] sm:h-[220px] md:h-1/2">
-              <div className="rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden relative group shadow-lg">
-                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105" style={{ backgroundImage: "url('/hero_cabin.png')" }} />
+              <div onClick={() => setActiveMatchIndex(sideMatches[0].originalIndex)} className="rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden relative group shadow-lg cursor-pointer">
+                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105" style={{ backgroundImage: `url('${sideMatches[0].image}')` }} />
               </div>
-              <div className="rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden relative group shadow-lg">
-                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105" style={{ backgroundImage: "url('/hero_cabin.png')" }} />
+              <div onClick={() => setActiveMatchIndex(sideMatches[1].originalIndex)} className="rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden relative group shadow-lg cursor-pointer">
+                <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105" style={{ backgroundImage: `url('${sideMatches[1].image}')` }} />
               </div>
             </div>
             {/* Bottom wide image */}
-            <div className="rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden relative group h-[130px] sm:h-[220px] md:h-1/2 shadow-lg">
-              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105" style={{ backgroundImage: "url('/hero_cabin.png')" }} />
+            <div onClick={() => setActiveMatchIndex(sideMatches[2].originalIndex)} className="rounded-[2rem] lg:rounded-[2.5rem] overflow-hidden relative group h-[130px] sm:h-[220px] md:h-1/2 shadow-lg cursor-pointer">
+              <div className="absolute inset-0 bg-cover bg-center transition-transform duration-700 ease-out group-hover:scale-105" style={{ backgroundImage: `url('${sideMatches[2].image}')` }} />
             </div>
           </div>
         </div>
