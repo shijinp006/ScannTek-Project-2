@@ -1,4 +1,4 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Menu, X, ArrowRight, Mail, Phone, MapPin, ArrowUpRight } from 'lucide-react';
 import { motion } from 'framer-motion';
 import Lenis from 'lenis';
@@ -17,6 +17,7 @@ import searchIcon from '../assets/searchIcon.svg';
 export default function LandingPage() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [activeAccordion, setActiveAccordion] = useState("01");
+  const lenisRef = useRef(null);
 
   useEffect(() => {
     const lenis = new Lenis({
@@ -30,15 +31,18 @@ export default function LandingPage() {
       touchMultiplier: 2,
       infinite: false,
     });
+    lenisRef.current = lenis;
 
+    let reqId;
     function raf(time) {
       lenis.raf(time);
-      requestAnimationFrame(raf);
+      reqId = requestAnimationFrame(raf);
     }
 
-    requestAnimationFrame(raf);
+    reqId = requestAnimationFrame(raf);
 
     return () => {
+      cancelAnimationFrame(reqId);
       lenis.destroy();
     };
   }, []);
@@ -139,90 +143,93 @@ export default function LandingPage() {
   ];
 
   return (
-    <div className="w-full bg-white min-h-screen">
+    <div id="home" className="w-full bg-white min-h-screen">
       {/* Hero Section */}
-      <motion.div
-        initial="hidden"
-        animate="visible"
-        variants={fadeInUp}
-        className="relative w-full min-h-[85vh] md:h-[85vh] lg:h-[95vh] rounded-tl-[1.5rem] rounded-tr-[1.5rem] rounded-bl-[1.5rem] rounded-br-none overflow-hidden bg-[#0d0f12] animate-scale-up flex flex-col p-4 sm:p-5 md:p-6 text-white"
-      >
-        {/* Background Image & Overlay */}
-        <div
-          className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-10000 ease-out hover:scale-105"
-          style={{ backgroundImage: "url('/hero_cabin.png')" }}
-        />
-        <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/85 via-black/45 to-black/35" />
+      <div className="relative w-full flex flex-col md:block">
+        <motion.div
+          initial="hidden"
+          animate="visible"
+          variants={fadeInUp}
+          className="relative w-full min-h-[85vh] md:h-[85vh] lg:h-[95vh] rounded-[1.5rem] md:rounded-tl-[1.5rem] md:rounded-tr-[1.5rem] md:rounded-bl-[1.5rem] md:rounded-br-none overflow-hidden bg-[#0d0f12] animate-scale-up flex flex-col p-4 sm:p-5 md:p-6 text-white mb-2 sm:mb-4 md:mb-0"
+        >
+          {/* Background Image & Overlay */}
+          <div
+            className="absolute inset-0 z-0 bg-cover bg-center transition-transform duration-10000 ease-out hover:scale-105"
+            style={{ backgroundImage: "url('/hero_cabin.png')" }}
+          />
+          <div className="absolute inset-0 z-0 bg-gradient-to-t from-black/85 via-black/45 to-black/35" />
 
-        {/* Header */}
-        <header className="relative z-10 flex justify-between items-center w-full">
-          <h1 className="text-sm md:text-xl font-bold tracking-widest font-sans text-white">
-            THE ARC
-          </h1>
-          <button
-            onClick={() => setIsMenuOpen(true)}
-            className="bg-[#e6d5c3] text-[#91682A] hover:bg-[#d4c1ad] hover:scale-105 active:scale-95 transition-all duration-300 font-extrabold tracking-widest text-[8px] md:text-xs px-3 py-1.5 md:px-5 md:py-2.5 rounded-full shadow-lg shadow-black/20 cursor-pointer"
-          >
-            MENU
-          </button>
-        </header>
+          {/* Header */}
+          <header className="relative z-10 flex justify-between items-center w-full">
+            <h1 className="text-sm md:text-xl font-bold tracking-widest font-sans text-white">
+              THE ARC
+            </h1>
+            <button
+              onClick={() => setIsMenuOpen(true)}
+              className="bg-[#e6d5c3] text-[#91682A] hover:bg-[#d4c1ad] hover:scale-105 active:scale-95 transition-all duration-300 font-extrabold tracking-widest text-[8px] md:text-xs px-3 py-1.5 md:px-5 md:py-2.5 rounded-full shadow-lg shadow-black/20 cursor-pointer"
+            >
+              MENU
+            </button>
+          </header>
 
-        {/* Main Hero Content */}
-        <main className="relative z-10 flex flex-col justify-end flex-grow pt-16 pb-8 md:pb-32 lg:pb-64 max-w-full md:max-w-2xl lg:max-w-3xl">
-          <div className="space-y-2 md:space-y-5">
-            <h2 className="text-[28px] sm:text-4xl md:text-6xl lg:text-[110px] xl:text-[130px] lg:whitespace-nowrap font-serif leading-[1.08] tracking-wide text-white">
-              THE FUTURE <br className="hidden sm:inline" />
-              OF HOME LIVING
-            </h2>
-            <p className="text-white/80 text-[8px] sm:text-xs md:text-[13px] lg:text-base max-w-[180px] sm:max-w-[250px] md:max-w-[360px] lg:max-w-lg leading-relaxed font-sans font-light">
-              Welcome to our real estate agency, where your dream home awaits. Browse our listings and find the perfect property for you.
-            </p>
-            <div className="flex items-center space-x-2 md:space-x-3 pt-1 md:pt-2">
-              <button className="bg-[#e6d5c3] text-[#91682A] hover:bg-[#d4c1ad] hover:scale-105 active:scale-95 transition-all duration-300 font-bold text-[8px] md:text-xs px-3 py-1.5 md:px-6 md:py-2.5 rounded-full shadow-lg cursor-pointer">
-                View
-              </button>
-              <button className="border border-white/40 text-white hover:bg-white/10 hover:scale-105 active:scale-95 transition-all duration-300 font-semibold text-[8px] md:text-xs px-3 py-1.5 md:px-6 md:py-2.5 rounded-full cursor-pointer">
-                Learn More
-              </button>
+          {/* Main Hero Content */}
+          <main className="relative z-10 flex flex-col justify-end items-center md:items-start text-center md:text-left flex-grow pt-16 pb-8 md:pb-32 lg:pb-64 max-w-full md:max-w-2xl lg:max-w-3xl">
+            <div className="space-y-2 md:space-y-5 flex flex-col items-center md:items-start w-full">
+              <h2 className="text-[28px] sm:text-4xl md:text-6xl lg:text-[110px] xl:text-[130px] lg:whitespace-nowrap font-serif leading-[1.08] tracking-wide text-white">
+                THE FUTURE <br className="hidden sm:inline" />
+                OF HOME LIVING
+              </h2>
+              <p className="text-white/80 text-[8px] sm:text-xs md:text-[13px] lg:text-base max-w-[180px] sm:max-w-[250px] md:max-w-[360px] lg:max-w-lg leading-relaxed font-sans font-light">
+                Welcome to our real estate agency, where your dream home awaits. Browse our listings and find the perfect property for you.
+              </p>
+              <div className="flex items-center justify-center md:justify-start space-x-2 md:space-x-3 pt-1 md:pt-2 w-full">
+                <button className="bg-[#e6d5c3] text-[#91682A] hover:bg-[#d4c1ad] hover:scale-105 active:scale-95 transition-all duration-300 font-bold text-[8px] md:text-xs px-3 py-1.5 md:px-6 md:py-2.5 rounded-full shadow-lg cursor-pointer">
+                  View
+                </button>
+                <button className="border border-white/40 text-white hover:bg-white/10 hover:scale-105 active:scale-95 transition-all duration-300 font-semibold text-[8px] md:text-xs px-3 py-1.5 md:px-6 md:py-2.5 rounded-full cursor-pointer">
+                  Learn More
+                </button>
+              </div>
             </div>
-          </div>
-        </main>
+          </main>
+        </motion.div>
 
         {/* Stats Card Overlay (Bottom Right) */}
-        <div className="absolute bottom-0 right-0 z-20 bg-white text-black p-2 md:p-5 lg:p-6 w-[140px] sm:w-[220px] md:w-[380px] lg:w-[480px] xl:w-[540px] rounded-tl-[1rem] md:rounded-tl-[1.5rem] flex flex-col justify-between">
+        <div className="md:absolute md:bottom-0 md:right-0 z-20 bg-white text-black p-4 md:p-5 lg:p-6 w-full md:w-[380px] lg:w-[480px] xl:w-[540px] rounded-[1rem] md:rounded-tl-[1.5rem] md:rounded-tr-none md:rounded-bl-none md:rounded-br-none flex flex-col justify-between">
           {/* Concave Corner Elements */}
-          <div className="inverted-corner-tr" />
-          <div className="inverted-corner-bl" />
+          <div className="inverted-corner-tr hidden md:block" />
+          <div className="inverted-corner-bl hidden md:block" />
 
-          <div className="space-y-1 md:space-y-2">
-            <h3 className="text-[10px] sm:text-sm md:text-2xl font-extrabold font-sans tracking-tight text-black">
+          <div className="space-y-2 md:space-y-2 text-center md:text-left">
+            <h3 className="text-xl sm:text-2xl md:text-2xl font-extrabold font-sans tracking-tight text-black">
               Who Are You ?
             </h3>
-            <p className="text-black font-bold text-[6px] sm:text-[10px] md:text-xs lg:text-base leading-tight md:leading-relaxed">
-              We offer a range of services including <br />buying, selling, and property management.
+            <p className="text-black font-medium md:font-bold text-xs sm:text-sm md:text-xs lg:text-base leading-tight md:leading-relaxed mx-auto md:mx-0">
+              We offer a range of services including <br className="hidden md:block" />buying, selling, and property management.
             </p>
 
             {/* Stats Columns */}
-            <div className="grid grid-cols-3 gap-1 md:gap-2 pt-1 md:pt-3">
-              <div>
-                <div className="text-[10px] sm:text-lg md:text-3xl lg:text-4xl font-black text-black leading-none">80+</div>
-                <div className="text-black text-[4px] sm:text-[8px] md:text-xs font-bold mt-0.5 md:mt-1 leading-tight">Premium House</div>
+            <div className="grid grid-cols-3 gap-2 md:gap-2 pt-2 md:pt-3">
+              <div className="flex flex-col items-center md:items-start">
+                <div className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-black text-black leading-none">80+</div>
+                <div className="text-black text-[10px] sm:text-xs md:text-xs font-bold mt-1 md:mt-1 leading-tight text-center md:text-left">Premium House</div>
               </div>
-              <div>
-                <div className="text-[10px] sm:text-lg md:text-3xl lg:text-4xl font-black text-black leading-none">2K+</div>
-                <div className="text-black text-[4px] sm:text-[8px] md:text-xs font-bold mt-0.5 md:mt-1 leading-tight">HappyClients</div>
+              <div className="flex flex-col items-center md:items-start">
+                <div className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-black text-black leading-none">2K+</div>
+                <div className="text-black text-[10px] sm:text-xs md:text-xs font-bold mt-1 md:mt-1 leading-tight text-center md:text-left">HappyClients</div>
               </div>
-              <div>
-                <div className="text-[10px] sm:text-lg md:text-3xl lg:text-4xl font-black text-black leading-none">500+</div>
-                <div className="text-black text-[4px] sm:text-[8px] md:text-xs font-bold mt-0.5 md:mt-1 leading-tight">AgentHouse</div>
+              <div className="flex flex-col items-center md:items-start">
+                <div className="text-2xl sm:text-3xl md:text-3xl lg:text-4xl font-black text-black leading-none">500+</div>
+                <div className="text-black text-[10px] sm:text-xs md:text-xs font-bold mt-1 md:mt-1 leading-tight text-center md:text-left">AgentHouse</div>
               </div>
             </div>
           </div>
         </div>
-      </motion.div> {/* End Hero Section */}
+      </div> {/* End Hero Section */}
 
       {/* Advantages Section */}
       <section
+        id="services"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
@@ -251,32 +258,26 @@ export default function LandingPage() {
           <div className="flex flex-col-reverse md:flex-row items-center justify-between w-full mx-auto relative min-h-[200px] md:min-h-[350px] md:h-[350px] lg:h-[500px] gap-2 md:gap-4 lg:gap-8 mt-4 md:mt-0 lg:mt-0">
 
             {/* Left: Pills */}
-            <div className="flex flex-col justify-center items-start h-full w-full md:w-max py-4 relative z-10 space-y-6 md:space-y-4 lg:space-y-7 pr-0" style={{ clipPath: 'inset(-100vw -100vw 0 -100vw)' }}>
-              <div className="bg-[#a27738] text-[#FFFFFF] pl-4 pr-12 py-2 md:px-4 md:py-2 lg:px-6 lg:py-2.5 rounded-full text-[9px] md:text-[10px] lg:text-sm font-sans font-medium leading-none shadow-sm transition-transform hover:scale-105 cursor-default relative">
+            <div className="flex flex-col justify-center items-stretch md:items-start h-full w-full md:w-max py-4 relative z-10 space-y-3 md:space-y-4 lg:space-y-7 px-4 md:px-0" style={{ clipPath: 'inset(-100vw -100vw 0 -100vw)' }}>
+              <div className="w-full md:w-auto bg-[#a27738] text-[#FFFFFF] px-4 py-3 md:px-4 md:py-2 lg:px-6 lg:py-2.5 rounded-full text-xs sm:text-sm md:text-[10px] lg:text-sm font-sans font-medium leading-none shadow-sm transition-transform hover:scale-105 cursor-default relative text-center md:text-left">
                 OUR ADVANTAGES
-                <img src={arrow6} alt="" className="absolute left-[152px] bottom-1/2 h-[100px] w-auto max-w-none pointer-events-none z-0 object-contain opacity-90 md:hidden" />
                 <img src={arrow1} alt="" className="absolute left-full ml-4 top-1/2 -translate-y-[1.6%] w-[45vw] lg:w-[600px] xl:w-[700px] max-w-none pointer-events-none z-[-1] object-contain opacity-100 hidden md:block" />
               </div>
-              <div className="bg-[#a27738] text-[#FFFFFF] pl-4 pr-12 py-2 md:px-4 md:py-2 lg:px-6 lg:py-2.5 rounded-full text-[9px] md:text-[10px] lg:text-sm font-sans font-medium leading-none shadow-sm transition-transform hover:scale-105 cursor-default relative">
+              <div className="w-full md:w-auto bg-[#a27738] text-[#FFFFFF] px-4 py-3 md:px-4 md:py-2 lg:px-6 lg:py-2.5 rounded-full text-xs sm:text-sm md:text-[10px] lg:text-sm font-sans font-medium leading-none shadow-sm transition-transform hover:scale-105 cursor-default relative text-center md:text-left">
                 YEARS OF GUARANTEE
-                <img src={arrow7} alt="" className="absolute left-[172px] bottom-1/2 h-[170px] w-auto max-w-none pointer-events-none z-0 object-contain opacity-90 md:hidden" />
                 <img src={arrow2} alt="" className="absolute left-full ml-4 top-1/2 -translate-y-[5.3%] w-[45vw] lg:w-[600px] xl:w-[700px] max-w-none pointer-events-none z-[-1] object-contain opacity-100 hidden md:block" />
               </div>
-              <div className="bg-[#a27738] text-[#FFFFFF] pl-4 pr-12 py-2 md:px-4 md:py-2 lg:px-6 lg:py-2.5 rounded-full text-[9px] md:text-[10px] lg:text-sm font-sans font-medium leading-none shadow-sm transition-transform hover:scale-105 cursor-default relative">
+              <div className="w-full md:w-auto bg-[#a27738] text-[#FFFFFF] px-4 py-3 md:px-4 md:py-2 lg:px-6 lg:py-2.5 rounded-full text-xs sm:text-sm md:text-[10px] lg:text-sm font-sans font-medium leading-none shadow-sm transition-transform hover:scale-105 cursor-default relative text-center md:text-left">
                 EFFICIENT LAYOUT DESIGN
-                <img src={arrow8} alt="" className="absolute left-47 bottom-1/2 h-[160px] w-auto max-w-none pointer-events-none z-0 object-contain opacity-90 md:hidden" />
                 <img src={arrow3} alt="" className="absolute left-full ml-4 top-1/2 -translate-y-[1.8%] w-[45vw] lg:w-[600px] xl:w-[700px] max-w-none pointer-events-none z-[-1] object-contain opacity-100 hidden md:block" />
               </div>
-              <div className="bg-[#a27738] text-[#FFFFFF] pl-4 pr-12 py-2 md:px-4 md:py-2 lg:px-6 lg:py-2.5 rounded-full text-[9px] md:text-[10px] lg:text-sm font-sans font-medium leading-none shadow-sm transition-transform hover:scale-105 cursor-default flex items-center gap-2 relative">
+              <div className="w-full md:w-auto bg-[#a27738] text-[#FFFFFF] px-4 py-3 md:px-4 md:py-2 lg:px-6 lg:py-2.5 rounded-full text-xs sm:text-sm md:text-[10px] lg:text-sm font-sans font-medium leading-none shadow-sm transition-transform hover:scale-105 cursor-default flex items-center justify-center md:justify-start gap-2 relative">
                 SHORT IMPLEMENTATION TIME
-                <ArrowRight size={12} strokeWidth={3} className="block md:hidden" />
                 <ArrowRight size={16} className="hidden md:block md:w-3 md:h-3 lg:w-4 lg:h-4" />
-                <img src={arrow9} alt="" className="absolute left-[228px] bottom-1/2 h-[220px] w-auto max-w-none pointer-events-none z-0 object-contain opacity-90 md:hidden" />
                 <img src={arrow4} alt="" className="absolute left-full ml-4 top-1/2 -translate-y-[36.4%] w-[45vw] lg:w-[600px] xl:w-[700px] max-w-none pointer-events-none z-[-1] object-contain opacity-100 hidden md:block" />
               </div>
-              <div className="bg-[#a27738] text-[#FFFFFF] pl-4 pr-12 py-2 md:px-4 md:py-2 lg:px-6 lg:py-2.5 rounded-full text-[9px] md:text-[10px] lg:text-sm font-sans font-medium leading-none shadow-sm transition-transform hover:scale-105 cursor-default relative">
+              <div className="w-full md:w-auto bg-[#a27738] text-[#FFFFFF] px-4 py-3 md:px-4 md:py-2 lg:px-6 lg:py-2.5 rounded-full text-xs sm:text-sm md:text-[10px] lg:text-sm font-sans font-medium leading-none shadow-sm transition-transform hover:scale-105 cursor-default relative text-center md:text-left">
                 MODERN ARCHITECTURE & TECHNOLOGY
-                <img src={arrow10} alt="" className="absolute left-[252px] bottom-1/2 h-[260px] w-auto max-w-none pointer-events-none z-0 object-contain opacity-90 md:hidden" />
                 <img src={arrow5} alt="" className="absolute left-full ml-4 top-1/2 -translate-y-[36.4%] w-[45vw] lg:w-[600px] xl:w-[700px] max-w-none pointer-events-none z-[-1] object-contain opacity-100 hidden md:block" />
               </div>
             </div>
@@ -297,6 +298,7 @@ export default function LandingPage() {
 
       {/* Property Match Section */}
       <section
+        id="listings"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
@@ -376,6 +378,7 @@ export default function LandingPage() {
 
       {/* Comfort & Space Accordion Section */}
       <section
+        id="philosophy"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
@@ -517,7 +520,19 @@ export default function LandingPage() {
                 <a
                   key={item}
                   href={`#${item.toLowerCase()}`}
-                  onClick={() => setIsMenuOpen(false)}
+                  onClick={(e) => {
+                    setIsMenuOpen(false);
+                    const targetId = item.toLowerCase();
+                    const element = document.getElementById(targetId);
+                    if (element) {
+                      e.preventDefault();
+                      if (lenisRef.current) {
+                        lenisRef.current.scrollTo(element);
+                      } else {
+                        element.scrollIntoView({ behavior: 'smooth' });
+                      }
+                    }
+                  }}
                   className="group flex items-center justify-between text-white/80 hover:text-white transition-colors py-2"
                 >
                   <span>{item}</span>
@@ -789,6 +804,7 @@ export default function LandingPage() {
 
       {/* New Let's Talk Footer Section */}
       <section
+        id="contact"
         initial="hidden"
         whileInView="visible"
         viewport={{ once: true, margin: "-100px" }}
